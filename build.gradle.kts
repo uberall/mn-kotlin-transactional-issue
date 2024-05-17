@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp") version "1.9.23-1.0.19"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.3.8"
+    id("io.micronaut.test-resources") version "4.4.0"
 }
 
 version = "0.1"
@@ -67,5 +68,3 @@ micronaut {
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
 }
-
-

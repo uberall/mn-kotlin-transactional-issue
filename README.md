@@ -1,4 +1,4 @@
-## Micronaut 4.4.2 Documentation
+## Micronaut Transactional Issue with Kotlin Suspend Functions
 
 Issue with Micronaut's transactional annotation using Kotlin suspend functions when throwing an exception that extends `kotlin.Throwable`
 
@@ -11,9 +11,8 @@ Issue with Micronaut's transactional annotation using Kotlin suspend functions w
 
 ## Running locally
 
-* Start the PostgreSQL server locally
-    * Under the root directory of this git repo, execute `docker compose up -d`
 * Run the test to reproduce the issue in another console `./gradlew -i test --rerun-tasks --tests "com.example.DemoTest.hikariIssue"`
+* Changeing the variable `callCount` in `DemoTest` to a number below Hikari pool size will make the test pass
 
 ## Possible root cause
 
