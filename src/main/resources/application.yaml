@@ -5,10 +5,9 @@ micronaut:
 # PostgresSQL
 datasources:
   default:
-    url: ${POSTGRES_DB_URI:`jdbc:postgresql://localhost:5430/demo`}
     driverClassName: org.postgresql.Driver
-    username: ${POSTGRES_DB_USERNAME:postgres}
-    password: ${POSTGRES_DB_PASSWORD:postgres}
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
     pooled: true
     maximum-pool-size: 10
     minimum-idle: 10
@@ -17,16 +16,16 @@ datasources:
     idle-timeout: 300000
     leak-detection-threshold: 20000
 
-# Migration
-liquibase:
-  datasources:
-    default:
-      change-log: 'classpath:db/liquibase-changelog.yaml'
-      enabled: ${DB_MIGRATION:true}
+test-resources:
+  containers:
+    postgres:
+      image-name: postgres:16.2
+      username: postgres
+      password: postgres
+      db-name: demo
 
 logger:
   levels:
     root: ${LOG_LEVEL_ROOT:INFO}
     com.zaxxer.hikari.HikariConfig: DEBUG
     com.zaxxer.hikari: TRACE
-    liquibase: DEBUG
