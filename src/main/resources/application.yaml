@@ -1,0 +1,32 @@
+micronaut:
+  application:
+    name: demo
+
+# PostgresSQL
+datasources:
+  default:
+    url: ${POSTGRES_DB_URI:`jdbc:postgresql://localhost:5430/demo`}
+    driverClassName: org.postgresql.Driver
+    username: ${POSTGRES_DB_USERNAME:postgres}
+    password: ${POSTGRES_DB_PASSWORD:postgres}
+    pooled: true
+    maximum-pool-size: 10
+    minimum-idle: 10
+    initial-size: 10
+    max-lifetime: 600000
+    idle-timeout: 300000
+    leak-detection-threshold: 20000
+
+# Migration
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:db/liquibase-changelog.yaml'
+      enabled: ${DB_MIGRATION:true}
+
+logger:
+  levels:
+    root: ${LOG_LEVEL_ROOT:INFO}
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
+    liquibase: DEBUG
